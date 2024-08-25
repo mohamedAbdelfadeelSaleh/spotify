@@ -28,6 +28,6 @@ public class PlayList {
 
 
     @OneToMany(mappedBy = "playlist", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Song> songs;
+    private List<SongInfo> songInfos;
 
 }

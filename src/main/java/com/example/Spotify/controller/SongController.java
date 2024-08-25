@@ -1,16 +1,16 @@
 package com.example.Spotify.controller;
 
 
-import com.example.Spotify.model.Song;
+import com.example.Spotify.model.SongInfo;
 import com.example.Spotify.service.SongService;
-import com.example.Spotify.service.impl.SongServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/v1/songs")
@@ -23,9 +23,17 @@ public class SongController {
         this.songService = songService;
     }
 
+
     @PostMapping
-    public ResponseEntity<Song> addSong(@RequestBody Song song) {
-        Song savedSong = songService.addSong(song);
-        return ResponseEntity.ok(savedSong);
+    public ResponseEntity<SongInfo> uploadSongAndCover(
+            @RequestParam String title,
+            @RequestParam MultipartFile songFile,
+            @RequestParam MultipartFile coverImageFile) throws IOException {
+
+        System.out.println("this controller is called");
+        songService.addSongAndCover(songFile, coverImageFile, title);
+        SongInfo songInfo = songService.addSongInfo(title);
+
+        return ResponseEntity.ok(songInfo);
     }
 }

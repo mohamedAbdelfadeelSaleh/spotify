@@ -13,11 +13,3 @@ public class SpotifyApplication {
 
 }
 
-
-
-///
-//  Controller
-// 	Service
-/*
-	model
-// */

@@ -14,5 +14,5 @@ public class Comment {
 
     @ManyToOne
     @JoinColumn(name = "song_id")
-    private Song song;
+    private SongInfo songInfo;
 }

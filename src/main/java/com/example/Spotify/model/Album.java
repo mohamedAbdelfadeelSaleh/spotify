@@ -28,7 +28,7 @@ public class Album {
     private Artist artist;
 
     @OneToMany(mappedBy = "album", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Song> songs;
+    private List<SongInfo> songInfoInfos;
 
 
 

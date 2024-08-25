@@ -25,7 +25,7 @@ public class Artist {
     private String name;
 
     @OneToMany(mappedBy = "artist", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Song> songs = new ArrayList<>();
+    private List<SongInfo> songInfos = new ArrayList<>();
 
     @OneToMany(mappedBy = "artist", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Album> albums = new ArrayList<>();

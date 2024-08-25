@@ -27,7 +27,7 @@ public class ArtistServiceImpl implements ArtistService {
         Artist artist = Artist.builder()
                 .name(artistDTO.getName())
                 .albums(new ArrayList<>())
-                .songs(new ArrayList<>())
+                .songInfos(new ArrayList<>())
                 .build();
 
         return artistRepository.save(artist);
