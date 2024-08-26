@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -13,23 +14,18 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class Album {
-
     @Id
     @GeneratedValue
     private long id;
     private String name;
-
     private String coverURL;
-
+    private Date releaseDate;
+    private boolean isPremium;
     @ManyToOne
     @JoinColumn(name = "artist_id")
     private Artist artist;
 
     @OneToMany(mappedBy = "album", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<SongInfo> songInfoInfos;
-
-
-
 }
