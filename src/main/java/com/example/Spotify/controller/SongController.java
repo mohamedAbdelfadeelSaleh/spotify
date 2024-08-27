@@ -79,11 +79,11 @@ public class SongController {
 //        return ResponseEntity.ok(songService.dislike(songId));
 //    }
 
-    @GetMapping("/play/{songId}")
-    public ResponseEntity<MultipartFile> play(@PathVariable Long songId){
-
-//                return ResponseEntity.ok(songService.like(songId));
-    }
+//    @GetMapping("/play/{songId}")
+//    public ResponseEntity<MultipartFile> play(@PathVariable Long songId){
+//
+////                return ResponseEntity.ok(songService.like(songId));
+//    }
 
 
 
