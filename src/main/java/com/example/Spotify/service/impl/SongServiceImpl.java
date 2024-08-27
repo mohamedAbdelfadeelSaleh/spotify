@@ -1,7 +1,7 @@
 package com.example.Spotify.service.impl;
 
-import com.example.Spotify.dto.SearchResultDTO;
 import com.example.Spotify.dto.SongDTO;
+import com.example.Spotify.exceptions.ResourceNotFoundException;
 import com.example.Spotify.model.SongInfo;
 import com.example.Spotify.repository.AlbumRepository;
 import com.example.Spotify.repository.ArtistRepository;
@@ -57,8 +57,6 @@ public class SongServiceImpl implements SongService {
 
 
     public void addSongAndCover(MultipartFile songFile, MultipartFile coverImageFile, String name) {
-//        String songsLocation = "src/main/java/com/example/Spotify/model/songs/";
-//        String songsCoverLocation = "src/main/java/com/example/Spotify/model/songs_cover/";
         File songsDir = new File(songsLocation);
         File coverDir = new File(songsCoverLocation);
 
@@ -116,7 +114,8 @@ public class SongServiceImpl implements SongService {
 
     @Transactional
     public SongInfo findSongByTitle(String title) {
-        return songRepository.findByTitle(title).stream()
+        return songRepository
+                .findByTitle(title).stream()
                 .findFirst()
                 .orElse(null);
     }
@@ -125,39 +124,23 @@ public class SongServiceImpl implements SongService {
 
 
 
-
-
-
-
-    //
 //    @Override
-//    public void addLike(long songId) {
-//        SongInfo songInfo = songRepository.findById(songId).orElseThrow(() -> new RecourseNotFoundException("Song not found"));
-//        songInfo.addLike();
-//        songRepository.save(songInfo);
+//    public SongInfo like(Long id) {
+//        SongInfo songInfo = songRepository.findById(id).orElse(null);
+//        if (songInfo == null)
+//            throw new ResourceNotFoundException("Song not found");
+//
+//        if(songInfo.)
+//        songRepository.save(songInfo.setLikes(songInfo.getLikes() + 1));
+//
+//        return songInfo;
 //    }
 //
 //    @Override
-//    public void removeLike(long songId) {
-//        SongInfo songInfo = songRepository.findById(songId).orElseThrow(() -> new RecourseNotFoundException("Song not found"));
-//        songInfo.setLikes(songInfo.getLikes() - 1);
-//        songRepository.save(songInfo);
+//    public SongInfo dislike(long id) {
+//        return null;
 //    }
-//
-//    @Override
-//    public void addDislike(long songId) {
-//        SongInfo songInfo = songRepository.findById(songId).orElseThrow(() -> new RecourseNotFoundException("Song not found"));
-//        songInfo.setDisLikes(songInfo.getDislikes() + 1);
-//        songRepository.save(songInfo);
-//
-//    }
-//
-//    @Override
-//    public void removeDislike(long songId) {
-//        SongInfo songInfo = songRepository.findById(songId).orElseThrow(() -> new RecourseNotFoundException("Song not found"));
-//        songInfo.setDisLikes(songInfo.getDislikes() - 1);
-//        songRepository.save(songInfo);
-//
-//    }
+
+
 
 }

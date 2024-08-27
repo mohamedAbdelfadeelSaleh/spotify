@@ -1,5 +1,6 @@
 package com.example.Spotify.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,10 +23,12 @@ public class Album {
     private String coverURL;
     private Date releaseDate;
     private boolean isPremium;
+
     @ManyToOne
     @JoinColumn(name = "artist_id")
     private Artist artist;
 
     @OneToMany(mappedBy = "album", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<SongInfo> songInfoInfos;
 }

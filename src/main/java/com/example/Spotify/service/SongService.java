@@ -16,6 +16,8 @@ public interface SongService {
 
     SongInfo findSongByTitle(String title);
 
+//    SongInfo like(Long id);
+//    SongInfo dislike(long id);
 
 
 
@@ -23,12 +25,4 @@ public interface SongService {
 
     SongInfo addSongInfo2(SongDTO songDTO);
 
-
-//    void addLike(long songId);
-//
-//    void removeLike(long songId);
-//
-//    void addDislike(long songId);
-//
-//    void removeDislike(long songId);
 }
