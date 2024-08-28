@@ -1,6 +1,5 @@
 package com.example.Spotify.dto;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,11 +8,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
-
 @Data
-@Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class ArtistDTO {
-    private String name;
+@NoArgsConstructor
+@Builder
+public class AlbumDTO {
+    private String albumName;
+    private String artistName;
+    private boolean isPremium;
+    private MultipartFile albumCover;
+    private List<SongUploadDTO> songs;
 }

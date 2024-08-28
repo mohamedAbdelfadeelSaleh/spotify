@@ -38,15 +38,19 @@ public class SongController {
 
 
     @GetMapping("/search/{title}")
-    public ResponseEntity<SearchResultDTO> search(@PathVariable String title) {
+    public ResponseEntity<SearchResultDTO> search(@PathVariable String title) throws IOException {
         SongInfo songInfo = songService.findSongByTitle(title);
         System.out.println("search controller is called");
         if (songInfo == null) {
             throw new ResourceNotFoundException("No song with This title");
         }
+        System.out.println(songInfo.getSongCoverURL());
+        MultipartFile songImage = songService.getSongImage(songInfo.getSongCoverURL());
+
         return ResponseEntity.ok(
                 new SearchResultDTO().builder()
                         .song(songInfo)
+                        .image(songImage)
                         .artist(songInfo.getArtist())
                         .songAlbum(songInfo.getAlbum())
                         .build()
@@ -68,7 +72,7 @@ public class SongController {
     }
 
 
-
+//
 //    @PutMapping("/like/{songId}")
 //    public ResponseEntity<SongInfo> like(@PathVariable Long songId){
 //        return ResponseEntity.ok(songService.like(songId));
@@ -78,13 +82,13 @@ public class SongController {
 //    public ResponseEntity<SongInfo> dislike(@PathVariable Long songId){
 //        return ResponseEntity.ok(songService.dislike(songId));
 //    }
-
+//
 //    @GetMapping("/play/{songId}")
 //    public ResponseEntity<MultipartFile> play(@PathVariable Long songId){
 //
 ////                return ResponseEntity.ok(songService.like(songId));
 //    }
-
+//
 
 
 

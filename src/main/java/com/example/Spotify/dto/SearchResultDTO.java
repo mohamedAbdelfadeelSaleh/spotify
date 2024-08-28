@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @Builder
@@ -15,6 +16,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class SearchResultDTO {
     private SongInfo song;
+    private MultipartFile image;
     private Artist artist;
     private Album songAlbum;
 //    private Album artistNewestAlbum;

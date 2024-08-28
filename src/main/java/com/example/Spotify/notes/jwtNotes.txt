@@ -1,0 +1,46 @@
+
+first JwtAuthenticationFilter is used to filter users according to their authurization level
+using jwt which consists of
+    header(algorithm, token type)
+    payload(Data) sun, name, iat, authorities[], extra claims
+    varifySignature() hash of first two parts
+remember these parts are separated using .
+
+
+JWTService could need modifications
+
+    public String generateToken(
+            Map<String, Object> extraClaims,
+            UserDetails userDetails
+    ){
+        return Jwts
+                .builder()
+                .setClaims(extraClaims)
+                .setSubject(userDetails.getUsername())
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24))
+                .signWith(getSigninKey(), SignatureAlgorithm.HS256)
+                .compact();
+    }
+    public String generateTokenNew(
+            UserDetails userDetails
+    ){
+        return generateToken(new HashMap<>(), userDetails);
+    }
+
+
+    public String generateToken(
+            UserDetails userDetails
+    ) {
+        return Jwts
+                .builder()
+                .setSubject(userDetails.getUsername())
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24))
+                .signWith(getSigninKey(), SignatureAlgorithm.HS256)
+                .compact();
+
+    }
+
+
+
