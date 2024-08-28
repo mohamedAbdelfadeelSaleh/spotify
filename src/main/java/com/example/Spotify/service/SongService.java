@@ -6,6 +6,8 @@ import com.example.Spotify.dto.SongDTO;
 import com.example.Spotify.model.SongInfo;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 
@@ -25,4 +27,5 @@ public interface SongService {
 
     SongInfo addSongInfo2(SongDTO songDTO);
 
+    MultipartFile getSongImage(String url) throws IOException;
 }

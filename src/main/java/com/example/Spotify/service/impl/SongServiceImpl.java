@@ -1,7 +1,6 @@
 package com.example.Spotify.service.impl;
 
 import com.example.Spotify.dto.SongDTO;
-import com.example.Spotify.exceptions.ResourceNotFoundException;
 import com.example.Spotify.model.SongInfo;
 import com.example.Spotify.repository.AlbumRepository;
 import com.example.Spotify.repository.ArtistRepository;
@@ -11,10 +10,14 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.io.FileOutputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+
+import java.io.*;
 import java.util.Date;
 
 
@@ -112,6 +115,7 @@ public class SongServiceImpl implements SongService {
         );
     }
 
+
     @Transactional
     public SongInfo findSongByTitle(String title) {
         return songRepository
@@ -121,6 +125,25 @@ public class SongServiceImpl implements SongService {
     }
 
 
+    @Override
+    public MultipartFile getSongImage(String url) throws IOException {
+        try (FileInputStream fileReader = new FileInputStream(url)) {
+            byte[] content = fileReader.readAllBytes();
+//            String songName = url.split("/")[content.length-1];
+            System.out.println(content.length);
+//            System.out.println(songName);
+            MultipartFile songCover =new MockMultipartFile(
+                    "file",                              // The name of the parameter
+                    new File(url).getName(),              // The original filename
+                    "image/jpeg",                         // Content type (adjust based on the actual file type)
+                    content                               // The content of the file
+            );
+            return songCover;
+        } catch (IOException e) {
+//            System.out.println("Song bad");
+            throw e;
+        }
+    }
 
 
 
@@ -141,6 +164,10 @@ public class SongServiceImpl implements SongService {
 //        return null;
 //    }
 
+
+    /*
+    public Resource play(long songId, long userId){}
+    * */
 
 
 }
