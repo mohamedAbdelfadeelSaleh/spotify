@@ -1,5 +1,6 @@
 package com.example.Spotify.config;
 
+import com.example.Spotify.service.JWTService;
 import com.example.Spotify.service.UserService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -11,6 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
@@ -52,8 +54,3 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     }
 }
 
-
-
-
-
-}
