@@ -1,6 +1,7 @@
 package com.example.Spotify.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,8 +39,10 @@ public class Playlist {
     private User user;
 
     @OneToMany(mappedBy = "playlist", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<SongInfo> songInfos;
+    @JsonIgnore
+    private List<SongInfo> songInfo;
 
     @OneToMany(mappedBy = "playlist", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<LikedDislikePlaylist> likedDislikePlaylistList = new ArrayList<>();
 }
