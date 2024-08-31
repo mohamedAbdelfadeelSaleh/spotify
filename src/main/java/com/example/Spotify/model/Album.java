@@ -17,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Album {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
     private String coverURL;

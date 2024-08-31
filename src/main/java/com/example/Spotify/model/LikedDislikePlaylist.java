@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 
 public class LikedDislikePlaylist {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private boolean flag; //t liked f disliked

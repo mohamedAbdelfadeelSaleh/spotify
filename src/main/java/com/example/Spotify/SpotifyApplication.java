@@ -2,11 +2,13 @@ package com.example.Spotify;
 
 import com.example.Spotify.enums.Role;
 //import com.example.Spotify.model.User;
+import com.example.Spotify.model.User;
 import com.example.Spotify.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 
 
@@ -16,8 +18,8 @@ public class SpotifyApplication  {
 		SpringApplication.run(SpotifyApplication.class, args);
 	}
 }
-
-
+//
+//
 //
 //@SpringBootApplication
 //public class SpotifyApplication implements CommandLineRunner {
@@ -33,6 +35,7 @@ public class SpotifyApplication  {
 //
 //	@Override
 //	public void run(String... args) {
+//
 //		if (userRepository.findByRole(Role.ADMIN) == null) {
 //			User admin = new User();
 //			admin.setEmail("admin@gmail.com");

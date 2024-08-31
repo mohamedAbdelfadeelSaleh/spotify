@@ -8,7 +8,7 @@ import lombok.Data;
 @Entity
 public class Comment {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String text;
 
