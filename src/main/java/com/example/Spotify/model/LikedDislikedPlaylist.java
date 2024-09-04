@@ -11,12 +11,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-
-public class LikedDislikePlaylist {
+@Table(name = "liked_disliked_playlist")
+public class LikedDislikedPlaylist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     private boolean flag; //t liked f disliked
 
     @ManyToOne

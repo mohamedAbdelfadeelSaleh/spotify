@@ -13,8 +13,6 @@ import lombok.NoArgsConstructor;
 
 public class SongDTO {
     private String title;
-
-//    @JsonProperty("isPremium")
     private boolean isPremium;
 
 
