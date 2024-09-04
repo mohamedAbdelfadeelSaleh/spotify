@@ -54,7 +54,6 @@ import java.util.List;
 
 
 @RestController
-//@CrossOrigin()
 @RequestMapping("/api/v1/artists")
 @RequiredArgsConstructor
 public class ArtistController {
@@ -62,8 +61,6 @@ public class ArtistController {
     private final ArtistService artistService;
     private final AlbumService albumService;
 
-
-    //this may need to be moved to another controller after security
     @PostMapping
     public ResponseEntity<Artist> addArtist(@RequestBody ArtistDTO artistDTO) {
         System.out.println("Artist Controller called");
@@ -71,10 +68,8 @@ public class ArtistController {
         return ResponseEntity.ok(artist);
     }
 
-//
     @GetMapping("/{artistId}")
     public ResponseEntity<List<Album>> getAlbumsByArtist(@PathVariable long artistId){
-
         return ResponseEntity.ok(artistService.getAllAlbums(artistId));
     }
 
@@ -96,13 +91,5 @@ public class ArtistController {
         System.out.println("Controller is called");
         return albumService.deleteAlbum(artistId, title);
     }
-
-
-
-    //
-//    @GetMapping
-//    public ResponseEntity<List<Artist>> getAllArtists() {
-//        List<ArtistDTO> artistDTOs=  artistService.getAllArtistDTOs();
-//    }
 
 }

@@ -3,16 +3,11 @@ package com.example.Spotify.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-
-
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.sound.midi.Track;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,7 +18,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "songInfo" )
+@Table(name = "song_info")
 public class SongInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,7 +52,7 @@ public class SongInfo {
 
     @OneToMany(mappedBy = "songInfo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
-    private List<LikeDislikeSong> likeDislikeSongList = new ArrayList<>();
+    private List<LikedDislikedSong> likedDislikedSongs = new ArrayList<>();
 
 
 }

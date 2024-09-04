@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data
 @Entity
+@Table(name = "comment")
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,6 +14,6 @@ public class Comment {
     private String text;
 
     @ManyToOne
-    @JoinColumn(name = "song_id")
+    @JoinColumn(name = "songInfo_id")
     private SongInfo songInfo;
 }

@@ -2,9 +2,6 @@ package com.example.Spotify.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.OneToMany;
-
-
-
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.ArrayList;
@@ -17,6 +14,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "artist")
 public class Artist {
 
     @Id

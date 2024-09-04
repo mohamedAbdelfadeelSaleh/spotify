@@ -11,7 +11,5 @@ import java.util.Optional;
 
 @Repository
 public interface ArtistRepository extends JpaRepository<Artist, Long> {
-//    Artist findById(long id);
-//    List<SongInfo> findByName(String name);
 
 }

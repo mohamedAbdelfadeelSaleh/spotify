@@ -3,7 +3,7 @@ package com.example.Spotify.service.impl;
 import com.example.Spotify.model.Comment;
 import com.example.Spotify.model.SongInfo;
 import com.example.Spotify.repository.CommentRepository;
-import com.example.Spotify.repository.SongRepository;
+import com.example.Spotify.repository.SongInfoRepository;
 import com.example.Spotify.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,13 +14,13 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CommentServiceImpl implements CommentService {
 
-    private SongRepository songRepository;
+    private SongInfoRepository songInfoRepository;
     private CommentRepository commentRepository;
 
 
     @Override
     public String addComment(long songId, String text) {
-        Optional<SongInfo> songInfoOpt = songRepository.findById(songId);
+        Optional<SongInfo> songInfoOpt = songInfoRepository.findById(songId);
         if (songInfoOpt.isEmpty()) {
             return "Song Not Found";
         }
@@ -31,7 +31,7 @@ public class CommentServiceImpl implements CommentService {
         comment.setSongInfo(songInfo);
         songInfo.getComments().add(comment);
         commentRepository.save(comment);
-        songRepository.save(songInfo);
+        songInfoRepository.save(songInfo);
         return "Comment Added";
 
     }
