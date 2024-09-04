@@ -40,7 +40,7 @@ public class Playlist {
 
     @OneToMany(mappedBy = "playlist", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
-    private List<SongInfo> songInfo;
+    private List<SongInfo> songInfo = new ArrayList<>();
 
     @OneToMany(mappedBy = "playlist", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore

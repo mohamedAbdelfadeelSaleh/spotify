@@ -3,54 +3,35 @@ package com.example.Spotify.controller;
 
 import com.example.Spotify.dto.SearchResultDTO;
 
-import com.example.Spotify.exceptions.ResourceNotFoundException;
+import com.example.Spotify.dto.SongDTO;
 import com.example.Spotify.model.SongInfo;
-import com.example.Spotify.service.AlbumService;
-import com.example.Spotify.service.ArtistService;
 import com.example.Spotify.service.SongService;
 
-import jakarta.annotation.Resource;
+import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
+import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/v1/songs")
 public class SongController {
 
     private final SongService songService;
-    private final ArtistService artistService;
-    private final AlbumService albumService;
 
-    @Autowired
-    public SongController(SongService songService, ArtistService artistService, AlbumService albumService) {
-        this.songService = songService;
-        this.artistService = artistService;
-        this.albumService = albumService;
-    }
+
     @GetMapping("/search/{title}")
-    public ResponseEntity<SearchResultDTO> search(@PathVariable String title) throws IOException {
-        System.out.println("search controller is called");
-        SongInfo songInfo = songService.findSongByTitle(title);
-        if (songInfo == null) {
-            throw new ResourceNotFoundException("No song with This title");
-        }
-        MultipartFile songImage = songService.getSongImage(songInfo.getSongCoverURL());
-        System.out.println(songInfo.getSongCoverURL());
+    public ResponseEntity<SearchResultDTO> search(
+            @PathVariable String title
+    ) throws IOException {
 
-        return ResponseEntity.ok(
-                new SearchResultDTO().builder()
-                        .song(songInfo)
-                        .image(songImage)
-                        .artist(songInfo.getArtist())
-                        .songAlbum(songInfo.getAlbum())
-                        .build()
-        );
+        System.out.println("search controller is called");
+        return ResponseEntity.ok(songService.findSongByTitle(title));
     }
 
     @PostMapping
@@ -66,17 +47,41 @@ public class SongController {
     }
 
 
-//
-//    @PutMapping("/like/{songId}")
-//    public ResponseEntity<SongInfo> like(@PathVariable Long songId){
-//        return ResponseEntity.ok(songService.like(songId));
+
+//    @PutMapping("/like/{songId}/{userId}")
+//    public ResponseEntity<SongInfo> like(
+//            @PathVariable Long songId,
+//            @PathVariable Long userId
+//    ){
+//        return ResponseEntity.ok(songService.like(songId, userId));
 //    }
 //
-//    @PutMapping("/dislike/{songId}")
-//    public ResponseEntity<SongInfo> dislike(@PathVariable Long songId){
-//        return ResponseEntity.ok(songService.dislike(songId));
+//    @PutMapping("/dislike/{songId}/{userId}")
+//    public ResponseEntity<SongInfo> dislike(
+//            @PathVariable Long songId,
+//            @PathVariable Long userId
+//    ){
+//        return ResponseEntity.ok(songService.dislike(songId, userId));
 //    }
-//
+
+    @GetMapping("/allLiked/{userId}")
+    public ResponseEntity<List<SongInfo>> getAllLikedSongs(
+            @PathVariable Long userId
+    ){
+        return ResponseEntity.ok(songService.getUserLikedSongs(userId));
+    }
+
+    @GetMapping("/allDisliked/{userId}")
+    public ResponseEntity<List<SongInfo>> getAllDislikedSongs(
+            @PathVariable Long userId
+    ){
+        return ResponseEntity.ok(songService.getUserDislikedSongs(userId));
+    }
+
+
+
+
+
 //    @GetMapping("/{songId}/play")
 //    public ResponseEntity<Resource> playSong(@PathVariable Long songId){
 //        Resource song = songService.play(songId);
@@ -86,6 +91,8 @@ public class SongController {
 //                .body(song);
 //
 //    }
+
+
 
     @GetMapping("/play/{id}")
     public ResponseEntity<Resource> playSong(@PathVariable Long id) {
@@ -104,7 +111,7 @@ public class SongController {
 
 
 
-
+//
 //    @PostMapping()
 //    public ResponseEntity<SongInfo> uploadSongAndCover2(
 //            @RequestParam SongDTO songDTO,
@@ -120,7 +127,7 @@ public class SongController {
 //            return ResponseEntity.badRequest().body(null);
 //        }
 //    }
-//
+
 //
 
 
