@@ -2,17 +2,20 @@ package com.example.Spotify.controller;
 
 
 import com.example.Spotify.dto.SearchResultDTO;
-import com.example.Spotify.dto.SongDTO;
+
 import com.example.Spotify.exceptions.ResourceNotFoundException;
 import com.example.Spotify.model.SongInfo;
 import com.example.Spotify.service.AlbumService;
 import com.example.Spotify.service.ArtistService;
 import com.example.Spotify.service.SongService;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import jakarta.annotation.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 
@@ -30,22 +33,15 @@ public class SongController {
         this.artistService = artistService;
         this.albumService = albumService;
     }
-
-
-
-
-
-
-
     @GetMapping("/search/{title}")
     public ResponseEntity<SearchResultDTO> search(@PathVariable String title) throws IOException {
-        SongInfo songInfo = songService.findSongByTitle(title);
         System.out.println("search controller is called");
+        SongInfo songInfo = songService.findSongByTitle(title);
         if (songInfo == null) {
             throw new ResourceNotFoundException("No song with This title");
         }
-        System.out.println(songInfo.getSongCoverURL());
         MultipartFile songImage = songService.getSongImage(songInfo.getSongCoverURL());
+        System.out.println(songInfo.getSongCoverURL());
 
         return ResponseEntity.ok(
                 new SearchResultDTO().builder()
@@ -57,14 +53,12 @@ public class SongController {
         );
     }
 
-
-
     @PostMapping
     public ResponseEntity<SongInfo> uploadSongAndCover(
             @RequestParam String title,
             @RequestParam MultipartFile songFile,
             @RequestParam MultipartFile coverImageFile) throws IOException {
-
+        System.out.println("upload song controller is called");
         songService.addSongAndCover(songFile, coverImageFile, title);
         SongInfo songInfo = songService.addSongInfo(title);
 
@@ -83,11 +77,26 @@ public class SongController {
 //        return ResponseEntity.ok(songService.dislike(songId));
 //    }
 //
-//    @GetMapping("/play/{songId}")
-//    public ResponseEntity<MultipartFile> play(@PathVariable Long songId){
+//    @GetMapping("/{songId}/play")
+//    public ResponseEntity<Resource> playSong(@PathVariable Long songId){
+//        Resource song = songService.play(songId);
+//        songService.updatePlayCount(songId);
+//        return ResponseEntity.ok()
+//                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+//                .body(song);
 //
-////                return ResponseEntity.ok(songService.like(songId));
 //    }
+
+    @GetMapping("/play/{id}")
+    public ResponseEntity<Resource> playSong(@PathVariable Long id) {
+        Resource file = songService.play(id);
+        String fileName = songService.getFileName(file);
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType("audio/mpeg"))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"")
+                .body(file);
+    }
 //
 
 
