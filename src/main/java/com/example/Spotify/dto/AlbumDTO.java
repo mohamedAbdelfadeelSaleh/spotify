@@ -13,7 +13,6 @@ import java.util.List;
 @Builder
 public class AlbumDTO {
     private String albumName;
-    private String artistName;
     private boolean isPremium;
     private MultipartFile albumCover;
     private List<SongUploadDTO> songs;

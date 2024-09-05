@@ -84,8 +84,9 @@ public class ArtistController {
         return albumService.addAlbumCover(artistId, title, albumImageFile);
     }
 
+
     @DeleteMapping("/album")
-    public ResponseEntity<String> addAlbumCover(
+    public ResponseEntity<String> deleteAlbum(
             @RequestParam("artistId") long artistId,
             @RequestParam("title") String title) {
         System.out.println("Controller is called");
