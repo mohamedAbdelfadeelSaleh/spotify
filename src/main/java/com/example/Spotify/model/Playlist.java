@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -32,7 +31,6 @@ public class Playlist {
     private Date createdAt;
     private Date updatedAt;
 
-//    private boolean visible;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -44,5 +42,5 @@ public class Playlist {
 
     @OneToMany(mappedBy = "playlist", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
-    private List<LikedDislikePlaylist> likedDislikePlaylistList = new ArrayList<>();
+    private List<LikedDislikedPlaylist> likedDislikedPlaylistList = new ArrayList<>();
 }

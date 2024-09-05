@@ -19,6 +19,5 @@ public class SearchResultDTO {
     private MultipartFile image;
     private Artist artist;
     private Album songAlbum;
-//    private Album artistNewestAlbum;
 
 }
