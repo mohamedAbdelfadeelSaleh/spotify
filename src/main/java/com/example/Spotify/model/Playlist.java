@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -18,16 +19,22 @@ import java.util.List;
 @Table(name = "playlist")
 public class Playlist {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "playlist_id")
     private long id;
     private String name;
+    private boolean isVisible;
+    private int popularity;
 
-    @OneToMany(mappedBy = "playlist", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @OneToMany(mappedBy = "playlist", cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<SongInfo> tracks;
+    private List<LikedDislikedPlaylist> likedPlaylists = new ArrayList<>();
 
-    @OneToMany(mappedBy = "playlist", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "playlist", cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<LikedDislikedPlaylist> likedPlaylists;
-
+    private List<SongPlaylistRelation> songPlaylistRelation = new ArrayList<>();
 }

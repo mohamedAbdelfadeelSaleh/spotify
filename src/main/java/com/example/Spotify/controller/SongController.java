@@ -1,42 +1,50 @@
 package com.example.Spotify.controller;
 
-
 import com.example.Spotify.dto.SearchResultDTO;
+import com.example.Spotify.dto.SongPlayDTO;
 import com.example.Spotify.model.SongInfo;
 import com.example.Spotify.service.SongService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import java.io.IOException;
+
 import java.util.List;
 
 @RestController
-@RequiredArgsConstructor
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @RequestMapping("/api/v1/songs")
 public class SongController {
 
     private final SongService songService;
 
-    @GetMapping("/search/{title}")
-    public ResponseEntity<SearchResultDTO> search(
-            @PathVariable String title
-    ) throws IOException {
-        System.out.println("search controller is called");
-        return ResponseEntity.ok(songService.findSongByTitle(title));
-    }
-
     @PostMapping
     public ResponseEntity<SongInfo> uploadSongAndCover(
             @RequestParam String title,
             @RequestParam MultipartFile songFile,
-            @RequestParam MultipartFile coverImageFile) throws IOException {
-        System.out.println("upload song controller is called");
+            @RequestParam MultipartFile coverImageFile
+    ){
         songService.addSongAndCover(songFile, coverImageFile, title);
         SongInfo songInfo = songService.addSongInfo(title);
-
         return ResponseEntity.ok(songInfo);
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<SearchResultDTO> search(
+            @RequestParam String title
+    ){
+        System.out.println("search controller is called");
+        return ResponseEntity.ok(songService.findSongByTitle(title));
+    }
+
+    @GetMapping("/stream")
+    public ResponseEntity<SongPlayDTO> downloadFile(
+            @RequestParam Long songId
+    ) {
+        return ResponseEntity.ok(songService.streamSong(songId));
+    }
+
     @PutMapping("/like/{songId}/{userId}")
     public ResponseEntity<SongInfo> like(
             @PathVariable Long songId,
@@ -66,5 +74,6 @@ public class SongController {
     ){
         return ResponseEntity.ok(songService.getUserDislikedSongs(userId));
     }
+
 
 }

@@ -1,21 +1,26 @@
 package com.example.Spotify.service.impl;
 
 import com.example.Spotify.dto.SearchResultDTO;
+import com.example.Spotify.dto.SongPlayDTO;
+import com.example.Spotify.dto.SongSearchDTO;
 import com.example.Spotify.exceptions.ResourceNotFoundException;
 import com.example.Spotify.model.LikedDislikedSong;
 import com.example.Spotify.model.SongInfo;
 import com.example.Spotify.model.User;
 import com.example.Spotify.repository.*;
+import com.example.Spotify.service.FileService;
 import com.example.Spotify.service.SongService;
 import lombok.RequiredArgsConstructor;
-import jakarta.transaction.Transactional;
-import org.springframework.http.ResponseEntity;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import java.io.FileOutputStream;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.*;
 
 
 @Service
@@ -25,71 +30,93 @@ public class SongServiceImpl implements SongService {
     private static final String songsLocation = "src/main/java/com/example/Spotify/model/songs/";
     private static final String songsCoverLocation = "src/main/java/com/example/Spotify/model/songs_cover/";
 
+    private final FileService fileService;
     private final UserRepository userRepository;
     private final SongInfoRepository songInfoRepository;
     private final LikeDislikeSongRepository likeDislikeSongRepository;
 
+
+    @Override
+    public void addSongAndCover(MultipartFile songFile, MultipartFile coverImageFile, String name) {
+            System.out.println(fileService.storeFile(songFile, songsLocation + name + ".mp3"));
+            System.out.println(fileService.storeFile(coverImageFile, songsCoverLocation + name + ".jpg"));
+    }
+
     @Override
     public SongInfo addSongInfo(String title) {
-        new SongInfo();
         return songInfoRepository.save(
             SongInfo.builder()
                     .title(title)
-                    .likes(0)
                     .songCoverURL(songsLocation + title + ".jpg")
                     .songURL(songsCoverLocation + title + ".mp3")
                     .likes(0)
                     .dislikes(0)
                     .playCount(0)
-                    .publishDate(new Date(System.currentTimeMillis()))
+                    .publishDate(new Date())
                     .isPremium(false)
+                    .likedDislikedSongs(new ArrayList<>())
+                    .songPlaylistRelations(new ArrayList<>())
                     .build()
-
         );
     }
 
-    public void addSongAndCover(MultipartFile songFile, MultipartFile coverImageFile, String name) {
-        try {
-            byte[] songBytes = songFile.getBytes();
-            FileOutputStream songFileWriter = new FileOutputStream(songsLocation + name + ".mp3");
-            songFileWriter.write(songBytes);
-            songFileWriter.close();
+    @Override
+    public SongPlayDTO streamSong(Long songId) {
+        String songName = getSongNameById(songId);
+        Resource songFile = loadFileAsResource(songName + ".mp3");
+        String songBase64 = encodeFileToBase64(songFile);
+        Resource coverFile = loadFileAsResource(songName + ".jpg");
+        String coverBase64 = encodeFileToBase64(coverFile);
+        return SongPlayDTO.builder()
+                .name(songName)
+                .song(songBase64)
+                .cover(coverBase64)
+                .build();
+    }
 
-        } catch (Exception e) {
-            System.out.println("Song bad");
-            ResponseEntity.badRequest();
-        }
-        try {
-            byte[] imageBytes = coverImageFile.getBytes();
-            FileOutputStream coverFileWriter = new FileOutputStream(songsCoverLocation + name + ".jpg");
-            coverFileWriter.write(imageBytes);
-            coverFileWriter.close();
-        } catch (Exception e) {
-            System.out.println("Image bad");
-            ResponseEntity.badRequest();
-        }
+    @Override
+    public String getSongNameById(Long songId) {
+        return songInfoRepository.findById(songId).get().getTitle();
     }
 
 
     @Override
-    @Transactional
+    public Resource loadFileAsResource(String fileName) {
+        Path fileStorageLocation = Paths.get(songsCoverLocation).toAbsolutePath().normalize();
+        if (fileName.contains("mp3")){
+            fileStorageLocation = Paths.get(songsLocation).toAbsolutePath().normalize();
+        }
+        try {
+            Path filePath = fileStorageLocation.resolve(fileName).normalize();
+            Resource resource = new UrlResource(filePath.toUri());
+            if (resource.exists() || resource.isReadable()) {
+                return resource;
+            } else {
+                throw new RuntimeException("File not found " + fileName);
+            }
+        } catch (MalformedURLException ex) {
+            throw new RuntimeException("File not found " + fileName, ex);
+        }
+    }
+
+    @Override
     public SearchResultDTO findSongByTitle(String title) {
-        System.out.println("find Song By Title serviceis called");
-        Optional<List<SongInfo>> songInfoListOpt = songInfoRepository.findByTitle(title);
-        if (songInfoListOpt.isEmpty()) {
+        System.out.println("find Song By Title service is called");
+        Optional<List<SongSearchDTO>> songSearchDtoListOpt = songInfoRepository.findByTitle(title);
+        System.out.println(songSearchDtoListOpt);
+        if (songSearchDtoListOpt.isEmpty()) {
             System.out.println("song info not found");
             throw new ResourceNotFoundException("song info not found");
         }
-        List<SongInfo> songInfoList = songInfoListOpt.get();
+        List<SongSearchDTO> songInfoList = songSearchDtoListOpt.get();
         System.out.println(songInfoList);
-        songInfoList.stream().sorted((s1,s2) -> s2.getPlayCount() - s1.getPlayCount());
+        songInfoList.sort((s1, s2) -> s2.getPlayCount() - s1.getPlayCount());
         System.out.println(songInfoList);
-        SongInfo songInfo = songInfoList.get(0);
-        return  SearchResultDTO.builder()
-                    .songs(songInfoList)
-                    .artist(songInfo.getArtist())
-                    .songAlbum(songInfo.getAlbum())
-                    .build();
+        return SearchResultDTO.builder()
+                .songSearchDtoList(songInfoList)
+                //album
+                //artist
+                .build();
     }
 
     @Override
@@ -163,5 +190,13 @@ public class SongServiceImpl implements SongService {
         return dislikedSongs;
     }
 
+    private String encodeFileToBase64(Resource resource) {
+        try {
+            byte[] fileContent = Files.readAllBytes(resource.getFile().toPath());
+            return Base64.getEncoder().encodeToString(fileContent);
+        } catch (IOException e) {
+            throw new RuntimeException("Could not read file: " + resource.getFilename(), e);
+        }
+    }
 
 }

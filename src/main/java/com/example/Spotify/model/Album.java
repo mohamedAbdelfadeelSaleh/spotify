@@ -18,11 +18,13 @@ import java.util.List;
 public class Album {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "album_id")
     private long id;
     private String name;
     private String coverURL;
     private Date releaseDate;
     private boolean isPremium;
+    private int popularity;
 
     @ManyToOne
     @JoinColumn(name = "artist_id")

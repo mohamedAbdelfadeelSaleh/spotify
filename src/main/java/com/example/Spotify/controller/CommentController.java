@@ -4,11 +4,12 @@ package com.example.Spotify.controller;
 import com.example.Spotify.model.Comment;
 import com.example.Spotify.service.CommentService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequiredArgsConstructor
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @RequestMapping("/api/v1/comments")
 public class CommentController {
     private final CommentService commentService;

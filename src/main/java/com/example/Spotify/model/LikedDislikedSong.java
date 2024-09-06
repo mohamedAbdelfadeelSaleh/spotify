@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 public class LikedDislikedSong {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "liked_disliked_song_id")
     private long id;
     private boolean flag;
 
@@ -25,6 +26,4 @@ public class LikedDislikedSong {
     @ManyToOne
     @JoinColumn(name = "songInfo_id")
     private SongInfo songInfo;
-
-
 }

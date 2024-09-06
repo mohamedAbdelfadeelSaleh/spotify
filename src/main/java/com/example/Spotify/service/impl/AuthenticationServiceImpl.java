@@ -3,7 +3,9 @@ package com.example.Spotify.service.impl;
 import com.example.Spotify.dto.JwtAuthenticationResponse;
 import com.example.Spotify.dto.SignUpRequest;
 import com.example.Spotify.dto.SigninRequest;
+import com.example.Spotify.model.Artist;
 import com.example.Spotify.model.User;
+import com.example.Spotify.repository.ArtistRepository;
 import com.example.Spotify.repository.UserRepository;
 import com.example.Spotify.service.AuthenticationService;
 import com.example.Spotify.service.JWTService;
@@ -22,6 +24,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JWTService jwtService;
+    private final ArtistRepository artistRepository;
 
     @Override
     public JwtAuthenticationResponse signin(SigninRequest signinRequest) {
@@ -61,6 +64,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .role(signUpRequest.getRole())
                 .build()
         );
+        if (signUpRequest.getRole().equals("ARTIST")) {
+            artistRepository.save(Artist.builder()
+                    .name(signUpRequest.getFirstName() + signUpRequest.getLastName())
+                    .build()
+            );
+        }
     }
 
     private boolean isValidPassword(String password) {

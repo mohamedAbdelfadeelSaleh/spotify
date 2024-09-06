@@ -14,6 +14,4 @@ import lombok.NoArgsConstructor;
 public class SongDTO {
     private String title;
     private boolean isPremium;
-
-
 }

@@ -13,15 +13,18 @@ import java.util.Optional;
 @Repository
 public interface LikeDislikeSongRepository extends JpaRepository<LikedDislikedSong, Long> {
 
-    @Query("SELECT l FROM LikedDislikedSong l " +
+    @Query( "SELECT l " +
+            "FROM LikedDislikedSong l " +
             "WHERE l.user.id = :userId AND l.songInfo.id = :songInfoId")
     Optional<LikedDislikedSong> findByUserAndSongInfo(@Param("userId") Long userId, @Param("songInfoId") Long songInfoId);
 
-    @Query("SELECT l.songInfo FROM LikedDislikedSong l " +
+    @Query( "SELECT l.songInfo " +
+            "FROM LikedDislikedSong l " +
             "WHERE l.user.id = :userId AND l.flag = true")
     List<SongInfo> findLikedSongsByUserId(@Param("userId") Long userId);
 
-    @Query("SELECT l.songInfo FROM LikedDislikedSong l " +
+    @Query( "SELECT l.songInfo " +
+            "FROM LikedDislikedSong l " +
             "WHERE l.user.id = :userId AND l.flag = false")
     List<SongInfo> findDislikedSongsByUserId(@Param("userId") Long userId);
 }
