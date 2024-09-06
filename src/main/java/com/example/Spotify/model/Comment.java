@@ -32,4 +32,5 @@ public class Comment {
     @OneToMany(mappedBy = "parentComment", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Comment> replies = new ArrayList<>();
 
+
 }
