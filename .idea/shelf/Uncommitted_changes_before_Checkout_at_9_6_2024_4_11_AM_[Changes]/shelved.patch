@@ -1,0 +1,45 @@
+Index: src/main/java/com/example/Spotify/model/PlayList.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.Spotify.model;\r\n\r\n\r\nimport com.fasterxml.jackson.annotation.JsonIgnore;\r\nimport jakarta.persistence.*;\r\nimport lombok.AllArgsConstructor;\r\nimport lombok.Builder;\r\nimport lombok.Data;\r\nimport lombok.NoArgsConstructor;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.Date;\r\nimport java.util.List;\r\n\r\n@Entity\r\n@Data\r\n@Builder\r\n@NoArgsConstructor\r\n@AllArgsConstructor\r\n@Table(name = \"playlist\")\r\npublic class Playlist {\r\n    @Id\r\n    @GeneratedValue\r\n    private long id;\r\n    private String name;\r\n    private String description;\r\n    private int likes;\r\n    private int dislikes;\r\n    private int tracks;\r\n    private int savedCount;\r\n    private int playCount;\r\n    private Date createdAt;\r\n    private Date updatedAt;\r\n\r\n//    private boolean visible;\r\n\r\n    @ManyToOne\r\n    @JoinColumn(name = \"user_id\")\r\n    private User user;\r\n\r\n    @OneToMany(mappedBy = \"playlist\", cascade = CascadeType.ALL, fetch = FetchType.LAZY)\r\n    @JsonIgnore\r\n    private List<SongInfo> songInfo;\r\n\r\n    @OneToMany(mappedBy = \"playlist\", cascade = CascadeType.ALL, fetch = FetchType.LAZY)\r\n    @JsonIgnore\r\n    private List<LikedDislikePlaylist> likedDislikePlaylistList = new ArrayList<>();\r\n}\r\n
+===================================================================
+diff --git a/src/main/java/com/example/Spotify/model/PlayList.java b/src/main/java/com/example/Spotify/model/PlayList.java
+--- a/src/main/java/com/example/Spotify/model/PlayList.java	
++++ b/src/main/java/com/example/Spotify/model/PlayList.java	
+@@ -7,7 +7,6 @@
+ import lombok.Builder;
+ import lombok.Data;
+ import lombok.NoArgsConstructor;
+-
+ import java.util.ArrayList;
+ import java.util.Date;
+ import java.util.List;
+@@ -20,7 +19,7 @@
+ @Table(name = "playlist")
+ public class Playlist {
+     @Id
+-    @GeneratedValue
++    @GeneratedValue(strategy = GenerationType.IDENTITY)
+     private long id;
+     private String name;
+     private String description;
+@@ -32,17 +31,15 @@
+     private Date createdAt;
+     private Date updatedAt;
+ 
+-//    private boolean visible;
+-
+     @ManyToOne
+     @JoinColumn(name = "user_id")
+     private User user;
+ 
+     @OneToMany(mappedBy = "playlist", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+     @JsonIgnore
+-    private List<SongInfo> songInfo;
++    private List<SongInfo> songInfo = new ArrayList<>();
+ 
+     @OneToMany(mappedBy = "playlist", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+     @JsonIgnore
+-    private List<LikedDislikePlaylist> likedDislikePlaylistList = new ArrayList<>();
++    private List<LikedDislikedPlaylist> likedDislikedPlaylistList = new ArrayList<>();
+ }
