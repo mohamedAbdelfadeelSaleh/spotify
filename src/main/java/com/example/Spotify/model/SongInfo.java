@@ -3,11 +3,16 @@ package com.example.Spotify.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+
+
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.sound.midi.Track;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -52,7 +57,7 @@ public class SongInfo {
 
     @OneToMany(mappedBy = "songInfo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
-    private List<LikedDislikedSong> likedDislikedSongList = new ArrayList<>();
+    private List<LikeDislikeSong> likeDislikeSongList = new ArrayList<>();
 
 
 }

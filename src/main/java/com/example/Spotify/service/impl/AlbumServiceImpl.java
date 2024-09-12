@@ -23,9 +23,62 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AlbumServiceImpl implements AlbumService {
 
-    private final AlbumRepository albumRepository;
-    private final ArtistRepository artistRepository;
+    private final SongRepository songRepository;
+    private AlbumRepository albumRepository;
+    private ArtistRepository artistRepository;
+
+
+    private static final String songsLocation = "src/main/java/com/example/Spotify/model/songs/";
+    private static final String songsCoverLocation = "src/main/java/com/example/Spotify/model/songs_cover/";
     private static final String albumCoverLocation = "src/main/java/com/example/Spotify/model/albums_cover/";
+
+
+    private final static String UploadedSucessfully = "uploaded sucessfully";
+    private final static String ArtistNotFound = "Artist not found";
+
+    public Album getAlbum(long id){
+        Optional<Album> albumOpt = albumRepository.findById(id);
+        return albumOpt.orElse(null);
+    }
+
+    public Album getByName(String name){
+        return albumRepository.findByName(name);
+    }
+
+
+
+    @Override
+    public String addAlbum(String title){
+        albumRepository.save(
+                new Album().builder()
+                        .name(title)
+                        .isPremium(false)
+//                        .artist(ar)
+//                        .coverURL(albumCoverLocation + title + "jpg")
+                        .releaseDate(new Date(System.currentTimeMillis()))
+                        .songInfoInfos(null)
+                        .build()
+        );
+        return UploadedSucessfully;
+    }
+
+    @Override
+    public String addAlbum(String title, long artistId){
+        Optional<Artist> artistOpt = artistRepository.findById(artistId);
+        Artist artist = artistOpt.orElse(null);
+        albumRepository.save(
+                new Album().builder()
+                        .name(title)
+                        .isPremium(false)
+                        .artist(artist)
+                        .coverURL(albumCoverLocation + title + "jpg")
+                        .releaseDate(new Date(System.currentTimeMillis()))
+                        .songInfoInfos(null)
+                        .build()
+        );
+        return UploadedSucessfully;
+    }
+
 
     @Override
     public String addAlbumCover(long artistId, String title, MultipartFile albumImageFile){
@@ -34,6 +87,8 @@ public class AlbumServiceImpl implements AlbumService {
         Optional<Artist> artistOpt = artistRepository.findById(artistId);
         Artist artist = artistOpt.orElse(null);
         System.out.println(artist);
+//        Artist artist = artistOpt.orElse();
+
         System.out.println(artist.getName());
         albumRepository.save(
                 new Album().builder()
@@ -42,6 +97,7 @@ public class AlbumServiceImpl implements AlbumService {
                         .artist(artist)
                         .coverURL(albumCoverLocation + title + "jpg")
                         .releaseDate(new Date(System.currentTimeMillis()))
+//                        .songInfoInfos(null)
                         .build()
         );
         System.out.println("adding to database is done");
@@ -60,5 +116,77 @@ public class AlbumServiceImpl implements AlbumService {
         }
         return "album cover is uploaded ";
     }
+
+
+    @Override
+    public String addSongToAlbum(long songId, long albumId){
+        Optional<SongInfo> songOpt = songRepository.findById(songId);
+        if(songOpt.isEmpty()){
+            return "Song Not Found";
+        }
+        SongInfo songInfo = songOpt.get();
+        Optional<Album> albumOpt = albumRepository.findById(albumId);
+        if(albumOpt.isEmpty()){
+            return "album Not Found";
+        }
+        Album album = albumOpt.get();
+        songInfo.setAlbum(album);
+        album.getSongInfoInfos().add(songInfo);
+        songRepository.save(songInfo);
+        albumRepository.save(album);
+        return songInfo.getTitle() + " is added to " + album.getName();
+    }
+
+
+//    @Transactional
+//    public String uplaodAlbumWithItsSongs(
+//            long artistId,
+//            AlbumDTO albumDTO
+//    ){
+//        Optional<Artist> artistOpt = artistRepository.findById(artistId);
+//
+//        if(artistOpt.isEmpty()){
+//            return ArtistNotFound;
+//        }
+//        Artist artist = artistOpt.get();
+//
+//        if (albumDTO.getSongs() == null || albumDTO.getSongs().isEmpty()) {
+//            return "An album must contain at least one song";
+//        }
+//
+//
+//        String albumCoverURL = fileStorageService.storeFile(albumDTO.getAlbumCover());
+//
+//        Album album = Album.builder()
+//                .name(albumDTO.getAlbumName())
+//                .coverURL(albumCoverURL)
+//                .releaseDate(new Data(System.currentTimeMillis()))
+//                .isPremium(albumDTO.isPremium())
+//                .artist(artist)
+//                .build();
+//
+//        albumRepository.save(album);
+//
+//        for (SongUploadDTO songDTO : albumDTO.getSongs()) {
+//            // Save song file and song cover image
+//            String songURL = fileStorageService.storeFile(songDTO.getSongFile());
+//            String songCoverURL = fileStorageService.storeFile(songDTO.getSongCoverFile());
+//
+//            SongInfo song = SongInfo.builder()
+//                    .title(songDTO.getTitle())
+//                    .songURL(songURL)
+//                    .songCoverURL(songCoverURL)
+//                    .publishDate(songDTO.getPublishDate())
+//                    .isPremium(songDTO.isPremium())
+//                    .artist(artist)
+//                    .album(album)
+//                    .build();
+//
+//            songInfoRepository.save(song);
+//        }
+//
+//
+//        return UploadedSucessfully;
+//    }
 
 }

@@ -17,7 +17,6 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "artist")
 public class Artist {
 
     @Id

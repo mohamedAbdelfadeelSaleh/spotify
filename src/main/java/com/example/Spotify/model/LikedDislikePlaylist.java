@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "linked_disliked_playlist")
-public class LikedDislikedPlaylist {
+
+public class LikedDislikePlaylist {
     @Id
     @GeneratedValue
     private long id;

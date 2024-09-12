@@ -49,4 +49,24 @@ public class AlbumController {
         return ResponseEntity.ok( albumService.addAlbumCover(artistId, title, albumImageFile) );
     }
 
+
+
+//    @PostMapping("/upload")
+//    public ResponseEntity<String> uploadAlbumAndCoverAndArtistId(
+//            @RequestParam String title,
+//            @RequestParam MultipartFile albumImageFile) throws IOException {
+//
+//        String albumRes = albumService.addAlbum(title, artistId);
+//        String coverRes = albumService.addAlbumCover(title, albumImageFile);
+//
+////        if(res.equals("Artist Not Found"))
+////            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(res);
+//        return ResponseEntity.ok(albumRes + coverRes );
+//    }
+//
+//    @PostMapping("/addSong/{songid}/album/{albumId}")
+//    public ResponseEntity<String> addSongToAlbum(@PathVariable long songId, @PathVariable long albumId){
+//        String res = albumService.addSongToAlbum(songId, albumId);
+//        return ResponseEntity.ok(res);
+//    }
 }

@@ -17,4 +17,5 @@ public class AlbumDTO {
     private String artistName;
     private boolean isPremium;
     private MultipartFile albumCover;
+    private List<SongUploadDTO> songs;
 }

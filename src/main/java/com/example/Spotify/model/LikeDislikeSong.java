@@ -5,14 +5,37 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.context.annotation.DependsOn;
+
+//@Entity
+//@Data
+//@Builder
+//@AllArgsConstructor
+//@NoArgsConstructor
+//
+//public class LikedSong{
+//    @Id
+//    @GeneratedValue
+//    private long id;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "_user_id")
+//    private User user;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "_song_id")
+//    private SongInfo songInfo;
+//
+//
+//}
+
 
 @Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Table(name = "liked_disliked_song")
-public class LikedDislikedSong {
+public class LikeDislikeSong {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
