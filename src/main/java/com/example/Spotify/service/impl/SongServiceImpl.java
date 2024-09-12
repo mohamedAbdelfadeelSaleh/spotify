@@ -7,6 +7,7 @@ import com.example.Spotify.repository.ArtistRepository;
 import com.example.Spotify.repository.SongRepository;
 import com.example.Spotify.service.SongService;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,7 @@ import java.util.Date;
 
 
 @Service
+@RequiredArgsConstructor(onConstructor_ = {@Autowired})
 public class SongServiceImpl implements SongService {
 
     private static final String songsLocation = "src/main/java/com/example/Spotify/model/songs/";
@@ -29,15 +31,6 @@ public class SongServiceImpl implements SongService {
 
 
     private final SongRepository songRepository;
-    private final AlbumRepository albumRepository;
-    private final ArtistRepository artistRepository;
-
-    @Autowired
-    public SongServiceImpl(SongRepository songRepository, AlbumRepository albumRepository, ArtistRepository artistRepository) {
-        this.songRepository = songRepository;
-        this.albumRepository = albumRepository;
-        this.artistRepository = artistRepository;
-    }
 
     @Override
     public SongInfo addSongInfo(String title) {
@@ -91,7 +84,6 @@ public class SongServiceImpl implements SongService {
 
     }
 
-    //this functions is not important
     @Override
     public void addSongAndCover2(SongDTO songDTO, MultipartFile songFile, MultipartFile coverImageFile) {
         System.out.println("addSongAndCover2 service is called ");
@@ -114,60 +106,5 @@ public class SongServiceImpl implements SongService {
                         .build()
         );
     }
-
-
-    @Transactional
-    public SongInfo findSongByTitle(String title) {
-        return songRepository
-                .findByTitle(title).stream()
-                .findFirst()
-                .orElse(null);
-    }
-
-
-    @Override
-    public MultipartFile getSongImage(String url) throws IOException {
-        try (FileInputStream fileReader = new FileInputStream(url)) {
-            byte[] content = fileReader.readAllBytes();
-//            String songName = url.split("/")[content.length-1];
-            System.out.println(content.length);
-//            System.out.println(songName);
-            MultipartFile songCover =new MockMultipartFile(
-                    "file",                              // The name of the parameter
-                    new File(url).getName(),              // The original filename
-                    "image/jpeg",                         // Content type (adjust based on the actual file type)
-                    content                               // The content of the file
-            );
-            return songCover;
-        } catch (IOException e) {
-//            System.out.println("Song bad");
-            throw e;
-        }
-    }
-
-
-
-//    @Override
-//    public SongInfo like(Long id) {
-//        SongInfo songInfo = songRepository.findById(id).orElse(null);
-//        if (songInfo == null)
-//            throw new ResourceNotFoundException("Song not found");
-//
-//        if(songInfo.)
-//        songRepository.save(songInfo.setLikes(songInfo.getLikes() + 1));
-//
-//        return songInfo;
-//    }
-//
-//    @Override
-//    public SongInfo dislike(long id) {
-//        return null;
-//    }
-
-
-    /*
-    public Resource play(long songId, long userId){}
-    * */
-
 
 }

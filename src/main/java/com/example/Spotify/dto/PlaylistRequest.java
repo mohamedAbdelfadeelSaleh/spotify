@@ -6,9 +6,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class ArtistDTO {
-    private String name;
+@NoArgsConstructor
+@Builder
+public class PlaylistRequest {
+    private Long userId;
+    private String playlistName;
+    private Boolean isVisible;
 }
