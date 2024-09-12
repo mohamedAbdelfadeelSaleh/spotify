@@ -1,6 +1,6 @@
 package com.example.Spotify.dto;
 
-import com.example.Spotify.model.Album;
+import  com.example.Spotify.model.Album;
 import com.example.Spotify.model.Artist;
 import com.example.Spotify.model.SongInfo;
 import lombok.AllArgsConstructor;
@@ -19,6 +19,5 @@ public class SearchResultDTO {
     private MultipartFile image;
     private Artist artist;
     private Album songAlbum;
-//    private Album artistNewestAlbum;
 
 }

@@ -3,16 +3,11 @@ package com.example.Spotify.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-
-
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.sound.midi.Track;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

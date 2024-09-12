@@ -32,7 +32,6 @@ public class Playlist {
     private Date createdAt;
     private Date updatedAt;
 
-//    private boolean visible;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
