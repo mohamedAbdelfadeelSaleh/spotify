@@ -5,87 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="089aee2f-c80f-43bf-9d7c-2e2fa2f5917e" name="Changes" comment="m">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/Spotify/controller/PlaylistController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/Spotify/dto/PlaylistRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/Spotify/dto/SongAlbumDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/Spotify/dto/SongPlayDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/Spotify/dto/SongSearchDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/Spotify/dto/UpdateAlbumRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/Spotify/dto/UpdatePlaylistRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/Spotify/dto/UpdateSongInPlaylistRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/Spotify/model/SongPlaylistRelation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/Spotify/model/UserSongContinue.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/Spotify/repository/SongPlaylistRelationRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/Spotify/service/FileService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/Spotify/service/impl/FileServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/Spotify/service/scheduledService/PopularityService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0924f3d9-5aaa-498a-ba2f-692f4aef71cb.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/0924f3d9-5aaa-498a-ba2f-692f4aef71cb.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0924f3d9-5aaa-498a-ba2f-692f4aef71cb/storage_v2/_src_/database/sounds.RFmQyg/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/0924f3d9-5aaa-498a-ba2f-692f4aef71cb/storage_v2/_src_/database/sounds.RFmQyg/schema/public.abK9xQ.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Spotify/SpotifyApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Spotify/SpotifyApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Spotify/controller/AlbumController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Spotify/controller/AlbumController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Spotify/controller/ArtistController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Spotify/controller/ArtistController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Spotify/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Spotify/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Spotify/controller/CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Spotify/controller/CommentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Spotify/controller/SongController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Spotify/controller/SongController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Spotify/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Spotify/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Spotify/dto/AlbumDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Spotify/dto/AlbumDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Spotify/dto/SearchResultDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Spotify/dto/SearchResultDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Spotify/dto/SongDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Spotify/dto/SongDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Spotify/model/Album.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Spotify/model/Album.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Spotify/model/Artist.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Spotify/model/Artist.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Spotify/model/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Spotify/model/Comment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Spotify/model/LikedDislikedPlaylist.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Spotify/model/LikedDislikedPlaylist.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Spotify/model/LikedDislikedSong.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Spotify/model/LikedDislikedSong.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Spotify/model/Playlist.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Spotify/model/Playlist.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Spotify/model/SongInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Spotify/model/SongInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Spotify/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Spotify/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Spotify/notes/jwtNotes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Spotify/notes/jwtNotes.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Spotify/repository/AlbumRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Spotify/repository/AlbumRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Spotify/repository/LikeDislikeSongRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Spotify/repository/LikeDislikeSongRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Spotify/repository/PlayListRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Spotify/repository/PlaylistRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Spotify/repository/SongInfoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Spotify/repository/SongInfoRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Spotify/service/AlbumService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Spotify/service/AlbumService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Spotify/service/PlayListService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Spotify/service/PlaylistService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Spotify/service/SongService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Spotify/service/SongService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Spotify/service/impl/AlbumServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Spotify/service/impl/AlbumServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Spotify/service/impl/AuthenticationServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Spotify/service/impl/AuthenticationServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Spotify/service/impl/PlayListServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Spotify/service/impl/PlaylistServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/Spotify/service/impl/SongServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/Spotify/service/impl/SongServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/Spotify/SpotifyApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/Spotify/SpotifyApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/Spotify/controller/AlbumController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/Spotify/controller/AlbumController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/Spotify/controller/ArtistController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/Spotify/controller/ArtistController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/Spotify/controller/AuthController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/Spotify/controller/AuthController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/Spotify/controller/CommentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/Spotify/controller/CommentController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/Spotify/controller/SongController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/Spotify/controller/SongController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/Spotify/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/Spotify/controller/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/Spotify/dto/AlbumDTO$AlbumDTOBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/Spotify/dto/AlbumDTO$AlbumDTOBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/Spotify/dto/AlbumDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/Spotify/dto/AlbumDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/Spotify/dto/SearchResultDTO$SearchResultDTOBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/Spotify/dto/SearchResultDTO$SearchResultDTOBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/Spotify/dto/SearchResultDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/Spotify/dto/SearchResultDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/Spotify/model/Album$AlbumBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/Spotify/model/Album$AlbumBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/Spotify/model/Album.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/Spotify/model/Album.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/Spotify/model/Artist$ArtistBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/Spotify/model/Artist$ArtistBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/Spotify/model/Artist.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/Spotify/model/Artist.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/Spotify/model/Comment.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/Spotify/model/Comment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/Spotify/model/LikedDislikedPlaylist.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/Spotify/model/LikedDislikedPlaylist.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/Spotify/model/LikedDislikedSong.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/Spotify/model/LikedDislikedSong.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/Spotify/model/Playlist$PlaylistBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/Spotify/model/Playlist$PlaylistBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/Spotify/model/Playlist.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/Spotify/model/Playlist.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/Spotify/model/SongInfo$SongInfoBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/Spotify/model/SongInfo$SongInfoBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/Spotify/model/SongInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/Spotify/model/SongInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/Spotify/model/User$UserBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/Spotify/model/User$UserBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/Spotify/model/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/Spotify/model/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/Spotify/repository/AlbumRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/Spotify/repository/AlbumRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/Spotify/repository/PlayListRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/Spotify/repository/PlayListRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/Spotify/repository/SongInfoRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/Spotify/repository/SongInfoRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/Spotify/service/AlbumService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/Spotify/service/AlbumService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/Spotify/service/PlayListService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/Spotify/service/PlayListService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/Spotify/service/SongService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/Spotify/service/SongService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/Spotify/service/impl/AlbumServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/Spotify/service/impl/AlbumServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/Spotify/service/impl/AuthenticationServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/Spotify/service/impl/AuthenticationServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/Spotify/service/impl/PlayListServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/Spotify/service/impl/PlayListServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/Spotify/service/impl/SongServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/Spotify/service/impl/SongServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_6_2024_4_09_AM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_6_2024_4_09_AM__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_6_2024_4_11_AM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_6_2024_4_11_AM__Changes_.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +24,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="controller-and-service-for-album" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
