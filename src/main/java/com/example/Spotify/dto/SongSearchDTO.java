@@ -7,16 +7,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
-
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Data
-public class SearchResultDTO {
-    private List<SongSearchDTO> songSearchDtoList;
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class SongSearchDTO {
+    private long id;
+    private String title;
     private Artist artist;
-    private Album songAlbum;
-
+    private Album album;
+    private int playCount;
 }

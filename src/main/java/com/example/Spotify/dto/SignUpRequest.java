@@ -1,5 +1,6 @@
 package com.example.Spotify.dto;
 
+import com.example.Spotify.enums.Role;
 import lombok.Data;
 
 @Data
@@ -9,4 +10,6 @@ public class SignUpRequest {
     private String lastName;
     private String email;
     private String password;
+    private Role role;
+
 }

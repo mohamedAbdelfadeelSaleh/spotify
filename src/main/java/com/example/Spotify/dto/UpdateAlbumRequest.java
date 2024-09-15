@@ -6,14 +6,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class AlbumDTO {
-    private String name;
-    private Long artistId;
-    private MultipartFile albumCover;
+public class UpdateAlbumRequest {
+    private Long userId;
+    private Long albumId;
+    private String albumName;
     private Boolean isPremium;
+    private MultipartFile albumCover;
+
 }
