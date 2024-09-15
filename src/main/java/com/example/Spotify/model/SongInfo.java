@@ -18,23 +18,23 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "songInfo" )
+@Table(name = "song_info")
 public class SongInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "song_info_id")
     private long id;
-
     private String title;
     private int likes;
     private int dislikes;
     private int playCount;
-
     private String songURL;
     private String songCoverURL;
     private Date publishDate;
     private boolean isPremium;
+    private int popularity;
 
-    @OneToMany(mappedBy = "songInfo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "songInfo", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Comment> comments = new ArrayList<>();
 
@@ -46,13 +46,15 @@ public class SongInfo {
     @JoinColumn(name = "album_id")
     private Album album;
 
-    @ManyToOne
-    @JoinColumn(name = "playlist_id")
-    private Playlist playlist;
-
-    @OneToMany(mappedBy = "songInfo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "songInfo", cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<LikeDislikeSong> likeDislikeSongList = new ArrayList<>();
+    private List<LikedDislikedSong> likedDislikedSongs = new ArrayList<>();
 
+    @OneToMany(mappedBy = "songInfo", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<SongPlaylistRelation> songPlaylistRelations = new ArrayList<>();
 
+    @OneToMany(mappedBy = "songInfo", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<UserSongContinue> userSongContinues = new ArrayList<>();
 }

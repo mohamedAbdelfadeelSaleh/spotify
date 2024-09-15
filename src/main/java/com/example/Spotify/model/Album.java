@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.util.Date;
 import java.util.List;
 
@@ -15,14 +14,17 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "album")
 public class Album {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "album_id")
     private long id;
     private String name;
     private String coverURL;
     private Date releaseDate;
     private boolean isPremium;
+    private int popularity;
 
     @ManyToOne
     @JoinColumn(name = "artist_id")
@@ -30,5 +32,5 @@ public class Album {
 
     @OneToMany(mappedBy = "album", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
-    private List<SongInfo> songInfoInfos;
+    private List<SongInfo> songInfo;
 }

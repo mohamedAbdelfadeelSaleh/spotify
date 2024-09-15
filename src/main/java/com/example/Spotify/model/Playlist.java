@@ -9,39 +9,32 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-@Entity
 @Data
+@Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "playlist")
 public class Playlist {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "playlist_id")
     private long id;
     private String name;
-    private String description;
-    private int likes;
-    private int dislikes;
-    private int tracks;
-    private int savedCount;
-    private int playCount;
-    private Date createdAt;
-    private Date updatedAt;
-
+    private boolean isVisible;
+    private int popularity;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(mappedBy = "playlist", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "playlist", cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<SongInfo> songInfo;
+    private List<LikedDislikedPlaylist> likedPlaylists = new ArrayList<>();
 
-    @OneToMany(mappedBy = "playlist", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "playlist", cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<LikedDislikePlaylist> likedDislikePlaylistList = new ArrayList<>();
+    private List<SongPlaylistRelation> songPlaylistRelation = new ArrayList<>();
 }
