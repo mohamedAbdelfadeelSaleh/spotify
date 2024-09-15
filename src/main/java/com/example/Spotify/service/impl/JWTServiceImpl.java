@@ -33,12 +33,6 @@ public class JWTServiceImpl implements JWTService {
                 .compact();
     }
 
-    public String generateTokenNew(
-            UserDetails userDetails
-    ){
-        return generateToken(new HashMap<>(), userDetails);
-    }
-
     public String generateToken(
             UserDetails userDetails
     ) {
