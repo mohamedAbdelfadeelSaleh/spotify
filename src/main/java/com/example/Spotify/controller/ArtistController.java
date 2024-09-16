@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/artists")
-@RequiredArgsConstructor()
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ArtistController {
 
     private final ArtistService artistService;
@@ -23,6 +23,7 @@ public class ArtistController {
     public ResponseEntity<Artist> addArtist(
             @RequestBody ArtistDTO artistDTO
     ) {
+        System.out.println("Artist Controller called");
         Artist artist = artistService.addArtist(artistDTO);
         return ResponseEntity.ok(artist);
     }

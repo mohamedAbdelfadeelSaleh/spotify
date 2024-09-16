@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor()
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 
 public class PlaylistServiceImpl implements PlaylistService {
 

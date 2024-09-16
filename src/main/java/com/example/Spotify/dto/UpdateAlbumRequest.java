@@ -1,5 +1,6 @@
 package com.example.Spotify.dto;
 
+import com.example.Spotify.model.Album;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

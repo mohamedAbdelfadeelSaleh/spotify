@@ -44,12 +44,12 @@ public class AlbumServiceImpl implements AlbumService {
         Artist artist = artistOpt.get();
         albumRepository.save(
                 Album.builder()
-                        .name(albumDTO.getName())
-                        .isPremium(false)
-                        .artist(artist)
-                        .coverURL(albumCoverLocation + albumDTO.getName() + ".jpg")
-                        .releaseDate(new Date())
-                        .build());
+                .name(albumDTO.getName())
+                .isPremium(false)
+                .artist(artist)
+                .coverURL(albumCoverLocation + albumDTO.getName() + ".jpg")
+                .releaseDate(new Date())
+                .build());
 
         fileService.storeFile(albumDTO.getAlbumCover(), albumCoverLocation + albumDTO.getName() + ".jpg");
         return ResponseEntity.ok("Album cover is uploaded");
@@ -109,13 +109,13 @@ public class AlbumServiceImpl implements AlbumService {
         String updatedCover = albumCoverLocation + album.getName() + ".jpg";
         fileService.storeFile(updateAlbumRequest.getAlbumCover(), updatedCover);
         return albumRepository.save(Album.builder()
-                .id(updateAlbumRequest.getAlbumId())
-                .name(updateAlbumRequest.getAlbumName())
-                .artist(artist)
-                .releaseDate(album.getReleaseDate())
-                .isPremium(album.isPremium())
-                .coverURL(updatedCover)
-                .build());
+                        .id(updateAlbumRequest.getAlbumId())
+                        .name(updateAlbumRequest.getAlbumName())
+                        .artist(artist)
+                        .releaseDate(album.getReleaseDate())
+                        .isPremium(album.isPremium())
+                        .coverURL(updatedCover)
+                        .build());
 
     }
 

@@ -33,6 +33,12 @@ public class JWTServiceImpl implements JWTService {
                 .compact();
     }
 
+    public String generateTokenNew(
+            UserDetails userDetails
+    ){
+        return generateToken(new HashMap<>(), userDetails);
+    }
+
     public String generateToken(
             UserDetails userDetails
     ) {
@@ -95,3 +101,12 @@ public class JWTServiceImpl implements JWTService {
         return extractClaim(token, Claims::getExpiration).before(new Date());
     }
 }
+
+
+
+
+
+
+
+
+

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequiredArgsConstructor()
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @RequestMapping("/api/v1/playlist")
 public class PlaylistController {
     private final PlaylistService playlistService;
@@ -55,7 +55,7 @@ public class PlaylistController {
     @PutMapping("/addSong")
     public ResponseEntity<String> addSong(
             @RequestBody UpdateSongInPlaylistRequest updateSongInPlaylistRequest
-    ){
+            ){
         return ResponseEntity.ok(playlistService.addSong(updateSongInPlaylistRequest));
     }
 

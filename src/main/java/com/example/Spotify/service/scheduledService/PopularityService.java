@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor()
+@RequiredArgsConstructor(onConstructor_ = {@Autowired})
 public class PopularityService {
     private final SongInfoRepository songInfoRepository;
     private final AlbumRepository albumRepository;

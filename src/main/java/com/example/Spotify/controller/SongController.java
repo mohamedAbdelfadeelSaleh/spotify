@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RestController
-@RequiredArgsConstructor()
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @RequestMapping("/api/v1/songs")
 public class SongController {
 
@@ -74,4 +74,6 @@ public class SongController {
     ){
         return ResponseEntity.ok(songService.getUserDislikedSongs(userId));
     }
+
+
 }

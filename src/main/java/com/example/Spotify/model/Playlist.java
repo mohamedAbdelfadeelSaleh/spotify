@@ -37,4 +37,5 @@ public class Playlist {
     @OneToMany(mappedBy = "playlist", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<SongPlaylistRelation> songPlaylistRelation = new ArrayList<>();
+
 }

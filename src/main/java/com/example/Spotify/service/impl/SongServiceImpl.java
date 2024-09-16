@@ -38,25 +38,25 @@ public class SongServiceImpl implements SongService {
 
     @Override
     public void addSongAndCover(MultipartFile songFile, MultipartFile coverImageFile, String name) {
-        System.out.println(fileService.storeFile(songFile, songsLocation + name + ".mp3"));
-        System.out.println(fileService.storeFile(coverImageFile, songsCoverLocation + name + ".jpg"));
+            System.out.println(fileService.storeFile(songFile, songsLocation + name + ".mp3"));
+            System.out.println(fileService.storeFile(coverImageFile, songsCoverLocation + name + ".jpg"));
     }
 
     @Override
     public SongInfo addSongInfo(String title) {
         return songInfoRepository.save(
-                SongInfo.builder()
-                        .title(title)
-                        .songCoverURL(songsLocation + title + ".jpg")
-                        .songURL(songsCoverLocation + title + ".mp3")
-                        .likes(0)
-                        .dislikes(0)
-                        .playCount(0)
-                        .publishDate(new Date())
-                        .isPremium(false)
-                        .likedDislikedSongs(new ArrayList<>())
-                        .songPlaylistRelations(new ArrayList<>())
-                        .build()
+            SongInfo.builder()
+                    .title(title)
+                    .songCoverURL(songsLocation + title + ".jpg")
+                    .songURL(songsCoverLocation + title + ".mp3")
+                    .likes(0)
+                    .dislikes(0)
+                    .playCount(0)
+                    .publishDate(new Date())
+                    .isPremium(false)
+                    .likedDislikedSongs(new ArrayList<>())
+                    .songPlaylistRelations(new ArrayList<>())
+                    .build()
         );
     }
 

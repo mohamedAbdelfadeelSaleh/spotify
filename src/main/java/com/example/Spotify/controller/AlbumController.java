@@ -9,7 +9,7 @@ import com.example.Spotify.service.AlbumService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-//import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,7 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api/v1/albums")
-@RequiredArgsConstructor()
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class AlbumController {
     private final AlbumService albumService;
     private final AlbumRepository albumRepository;
@@ -63,7 +63,7 @@ public class AlbumController {
             @RequestParam String albumName,
             @RequestParam Boolean isPremium,
             @RequestParam MultipartFile albumCover
-    ){
+        ){
         return ResponseEntity.ok(albumService.updateAlbum(UpdateAlbumRequest.builder()
                 .userId(userId)
                 .albumId(albumId)
