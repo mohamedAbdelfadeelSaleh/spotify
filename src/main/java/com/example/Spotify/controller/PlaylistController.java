@@ -26,12 +26,12 @@ public class PlaylistController {
         return ResponseEntity.ok(playlistService.addPlaylist(playlistRequest));
     }
 
-    @GetMapping("/allPlaylists")
+    @GetMapping
     public ResponseEntity<List<Playlist>> getPlaylists() {
         return ResponseEntity.ok(playlistService.getAllPlaylistSortedByPopularity());
     }
 
-    @GetMapping
+    @GetMapping("/access")
     public ResponseEntity<List<SongInfo>> getPlaylists(
             @RequestBody UpdatePlaylistRequest updatePlaylistRequest
     ) {

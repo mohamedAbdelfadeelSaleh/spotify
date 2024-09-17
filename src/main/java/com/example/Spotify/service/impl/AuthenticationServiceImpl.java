@@ -3,6 +3,7 @@ package com.example.Spotify.service.impl;
 import com.example.Spotify.dto.JwtAuthenticationResponse;
 import com.example.Spotify.dto.SignUpRequest;
 import com.example.Spotify.dto.SigninRequest;
+import com.example.Spotify.enums.Role;
 import com.example.Spotify.model.Artist;
 import com.example.Spotify.model.User;
 import com.example.Spotify.repository.ArtistRepository;
@@ -14,6 +15,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 @Service
@@ -28,18 +31,16 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public JwtAuthenticationResponse signin(SigninRequest signinRequest) {
-        System.out.println("sign in service is called ");
+        System.out.println("signin service is called ");
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(signinRequest.getEmail(), signinRequest.getPassword())
         );
-
         User user = userRepository.findByEmail(signinRequest.getEmail())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid email or password"));
 
-        String jwt = jwtService.generateToken(user);
+        String token = jwtService.generateToken(user);
         String refreshToken = jwtService.generateRefreshToken(user);
-
-        return new JwtAuthenticationResponse(jwt, refreshToken);
+        return new JwtAuthenticationResponse(token, refreshToken);
     }
 
     @Override
@@ -56,6 +57,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             System.out.println("Use strong password");
             throw new IllegalArgumentException("Password must be at least 8 characters long, contain letters and numbers");
         }
+        if (Objects.equals(signUpRequest.getRole(), Role.ARTIST)) {
+            artistRepository.save(Artist.builder()
+                    .name(signUpRequest.getFirstName() + signUpRequest.getLastName())
+                    .build()
+            );
+        }
         userRepository.save(User.builder()
                 .email(signUpRequest.getEmail())
                 .firstName(signUpRequest.getFirstName())
@@ -64,12 +71,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .role(signUpRequest.getRole())
                 .build()
         );
-        if (signUpRequest.getRole().equals("ARTIST")) {
-            artistRepository.save(Artist.builder()
-                    .name(signUpRequest.getFirstName() + signUpRequest.getLastName())
-                    .build()
-            );
-        }
     }
 
     private boolean isValidPassword(String password) {

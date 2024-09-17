@@ -22,6 +22,7 @@ public class Artist {
     private long id;
     private String name;
     private int popularity;
+    private String imageURL;
 
     @OneToMany(mappedBy = "artist", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore

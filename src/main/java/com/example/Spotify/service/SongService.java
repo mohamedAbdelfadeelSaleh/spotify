@@ -19,5 +19,5 @@ public interface SongService {
     SongInfo dislike(long id, long userId);
     List<SongInfo> getUserLikedSongs(long userId);
     List<SongInfo> getUserDislikedSongs(long userId);
-
+    String deleteSong(Long id);
 }

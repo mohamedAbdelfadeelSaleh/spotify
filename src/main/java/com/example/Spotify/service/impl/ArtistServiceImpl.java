@@ -7,6 +7,8 @@ import com.example.Spotify.repository.ArtistRepository;
 import com.example.Spotify.service.ArtistService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,17 +21,6 @@ import java.util.Optional;
 public class ArtistServiceImpl implements ArtistService {
 
     private final ArtistRepository artistRepository;
-
-    @Override
-    public Artist addArtist(ArtistDTO artistDTO) {
-        Artist artist = Artist.builder()
-                .name(artistDTO.getName())
-                .albums(new ArrayList<>())
-                .songInfos(new ArrayList<>())
-                .build();
-
-        return artistRepository.save(artist);
-    }
 
     @Override
     public List<Album> getAllAlbums(long artistId) {

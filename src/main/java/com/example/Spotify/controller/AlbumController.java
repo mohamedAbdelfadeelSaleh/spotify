@@ -20,7 +20,6 @@ import org.springframework.web.multipart.MultipartFile;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class AlbumController {
     private final AlbumService albumService;
-    private final AlbumRepository albumRepository;
 
     @PostMapping
     public ResponseEntity<String> addAlbum(

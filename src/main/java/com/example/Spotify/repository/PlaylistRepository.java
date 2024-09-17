@@ -23,9 +23,6 @@ public interface PlaylistRepository extends JpaRepository<Playlist, Integer> {
 
     @Query( "SELECT p " +
             "FROM Playlist p " +
-            "LEFT JOIN p.songPlaylistRelation spr " +
-            "LEFT JOIN spr.songInfo s " +
-            "GROUP BY p.id " +
-            "ORDER BY  SUM(2 * s.likes + s.playCount - s.dislikes) DESC ")
+            "ORDER BY p.popularity DESC ")
     List<Playlist> getAllPlaylistSortedByPopularity();
 }

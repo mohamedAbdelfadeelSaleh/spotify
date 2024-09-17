@@ -199,4 +199,14 @@ public class SongServiceImpl implements SongService {
         }
     }
 
+    @Override
+    public String deleteSong (Long songId) {
+        Optional<SongInfo> songInfoOpt = songInfoRepository.findById(songId);
+        if(songInfoOpt.isEmpty()) {
+            System.out.println("Song Not found");
+            return "Song Not found";
+        }
+        songInfoRepository.deleteById(songId);
+        return "Song deleted Successfully";
+    }
 }

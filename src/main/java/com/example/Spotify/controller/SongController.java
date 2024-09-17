@@ -7,6 +7,7 @@ import com.example.Spotify.service.SongService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,17 +21,20 @@ public class SongController {
     private final SongService songService;
 
     @PostMapping
+    @PreAuthorize("hasRole('ARTIST')")
     public ResponseEntity<SongInfo> uploadSongAndCover(
             @RequestParam String title,
             @RequestParam MultipartFile songFile,
             @RequestParam MultipartFile coverImageFile
     ){
+        System.out.println("post song is called");
         songService.addSongAndCover(songFile, coverImageFile, title);
         SongInfo songInfo = songService.addSongInfo(title);
         return ResponseEntity.ok(songInfo);
     }
 
     @GetMapping("/search")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<SearchResultDTO> search(
             @RequestParam String title
     ){
@@ -46,6 +50,7 @@ public class SongController {
     }
 
     @PutMapping("/like/{songId}/{userId}")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<SongInfo> like(
             @PathVariable Long songId,
             @PathVariable Long userId
@@ -54,6 +59,7 @@ public class SongController {
     }
 
     @PutMapping("/dislike/{songId}/{userId}")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<SongInfo> dislike(
             @PathVariable Long songId,
             @PathVariable Long userId
@@ -62,6 +68,7 @@ public class SongController {
     }
 
     @GetMapping("/allLiked/{userId}")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<List<SongInfo>> getAllLikedSongs(
             @PathVariable Long userId
     ){
@@ -69,11 +76,18 @@ public class SongController {
     }
 
     @GetMapping("/allDisliked/{userId}")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<List<SongInfo>> getAllDislikedSongs(
             @PathVariable Long userId
     ){
         return ResponseEntity.ok(songService.getUserDislikedSongs(userId));
     }
 
-
+    @DeleteMapping("/{songId}")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('ARTIST')")
+    public ResponseEntity<String> deleteSong(
+            @PathVariable Long songId
+    ) {
+        return ResponseEntity.ok(songService.deleteSong(songId));
+    }
 }

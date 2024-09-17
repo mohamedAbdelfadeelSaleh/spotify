@@ -1,8 +1,6 @@
 package com.example.Spotify.controller;
 
-import com.example.Spotify.dto.ArtistDTO;
 import com.example.Spotify.model.Album;
-import com.example.Spotify.model.Artist;
 import com.example.Spotify.service.ArtistService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,15 +16,6 @@ import java.util.List;
 public class ArtistController {
 
     private final ArtistService artistService;
-
-    @PostMapping
-    public ResponseEntity<Artist> addArtist(
-            @RequestBody ArtistDTO artistDTO
-    ) {
-        System.out.println("Artist Controller called");
-        Artist artist = artistService.addArtist(artistDTO);
-        return ResponseEntity.ok(artist);
-    }
 
     @GetMapping("/{artistId}")
     public ResponseEntity<List<Album>> getAlbumsByArtist(
