@@ -4,9 +4,7 @@ import com.example.Spotify.dto.SearchResultDTO;
 import com.example.Spotify.dto.SongPlayDTO;
 import com.example.Spotify.dto.SongSearchDTO;
 import com.example.Spotify.exceptions.ResourceNotFoundException;
-import com.example.Spotify.model.LikedDislikedSong;
-import com.example.Spotify.model.SongInfo;
-import com.example.Spotify.model.User;
+import com.example.Spotify.model.*;
 import com.example.Spotify.repository.*;
 import com.example.Spotify.service.FileService;
 import com.example.Spotify.service.SongService;
@@ -101,21 +99,21 @@ public class SongServiceImpl implements SongService {
 
     @Override
     public SearchResultDTO findSongByTitle(String title) {
-        System.out.println("find Song By Title service is called");
-        Optional<List<SongSearchDTO>> songSearchDtoListOpt = songInfoRepository.findByTitle(title);
-        System.out.println(songSearchDtoListOpt);
-        if (songSearchDtoListOpt.isEmpty()) {
+        List<SongSearchDTO> songSearchDtoList = songInfoRepository.findByTitle(title);
+        if (songSearchDtoList.isEmpty()) {
             System.out.println("song info not found");
             throw new ResourceNotFoundException("song info not found");
         }
-        List<SongSearchDTO> songInfoList = songSearchDtoListOpt.get();
-        System.out.println(songInfoList);
-        songInfoList.sort((s1, s2) -> s2.getPlayCount() - s1.getPlayCount());
-        System.out.println(songInfoList);
+
+        songSearchDtoList.sort((s1, s2) -> s2.getPopularity() - s1.getPopularity());
+        SongInfo mainSongInfo = songInfoRepository.findById(songSearchDtoList.get(0).getId()).orElse(null);
+        assert mainSongInfo != null;
+        Artist artist = mainSongInfo.getArtist();
+        Album album = mainSongInfo.getAlbum();
         return SearchResultDTO.builder()
-                .songSearchDtoList(songInfoList)
-                //album
-                //artist
+                .songSearchDtoList(songSearchDtoList)
+                .artist(artist)
+                .songAlbum(album)
                 .build();
     }
 
