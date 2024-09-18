@@ -8,7 +8,6 @@ src/main/java/com/example/Spotify/model/songs/
 src/main/java/com/example/Spotify/model/songs_cover/
 src/main/java/com/example/Spotify/model/albums_cover/
 src/main/java/com/example/Spotify/model/userImage/
-src/main/java/com/example/Spotify/model/PlayList.java
 
 
 ### STS ###
