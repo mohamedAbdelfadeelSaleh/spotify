@@ -12,9 +12,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class SongSearchDTO {
-    private long id;
+    private Long id;
     private String title;
-    private Artist artist;
-    private Album album;
-    private int playCount;
+    private String artist;
+    private String album;
+    private int popularity;
 }

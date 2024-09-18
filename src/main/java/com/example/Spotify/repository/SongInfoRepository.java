@@ -7,13 +7,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface SongInfoRepository extends JpaRepository<SongInfo, Long> {
 
-    @Query(value = "SELECT (s.id, s.title, s.artist.name, s.album.name, s.playCount) " +
+    @Query(value = "SELECT new com.example.Spotify.dto.SongSearchDTO(s.id, s.title, s.artist.name, s.album.name, s.popularity) " +
             "FROM SongInfo s " +
             "WHERE s.title = :title")
-    Optional<List<SongSearchDTO>> findByTitle(@Param("title") String title);
+    List<SongSearchDTO> findByTitle(@Param("title") String title);
+
 }

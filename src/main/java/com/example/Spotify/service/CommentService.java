@@ -1,11 +1,14 @@
 package com.example.Spotify.service;
 
 
+import com.example.Spotify.dto.*;
 import com.example.Spotify.model.Comment;
+import org.springframework.data.domain.Page;
 
 public interface CommentService {
-    Comment addCommentToSong(long userId, long songId, String text);
-    Comment addReply(long userId, long parentCommentId, String text);
-    Comment updateComment(long userId, long commentId, String text);
-    String deleteComment(long userId, long commentId);
+    Comment addCommentToSong(AddCommentDTO AddCommentDTO);
+    Page<Comment> getCommentsOnSong(GetCommentDTO getCommentDTO);
+    CommentDTO addReply(AddReplyDTO AddReplyDTO);
+    Comment updateComment(UpdateCommentDTO UpdateCommentDTO);
+    String deleteComment(DeleteCommentDTO deleteComentDTO);
 }

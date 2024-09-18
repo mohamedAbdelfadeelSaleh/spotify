@@ -1,12 +1,13 @@
 package com.example.Spotify.service.impl;
 
+import com.example.Spotify.model.User;
 import com.example.Spotify.service.JWTService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.security.core.userdetails.User;
+//import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -25,11 +26,18 @@ public class JWTServiceImpl implements JWTService {
     }
 
     @Override
+    public Long extractUserId(String token) {
+        return extractClaim(token, claims -> claims.get("userId", Long.class));
+    }
+
+    @Override
     public String generateToken(
             UserDetails userDetails
-
     ) {
         Map<String, Object> claims = new HashMap<>();
+        if(userDetails instanceof User) {
+            claims.put("userId", ((User)userDetails).getId());
+        }
         claims.put("roles", userDetails.getAuthorities());  // Add roles to claims
         return Jwts.builder()
                 .setClaims(claims)
@@ -85,4 +93,5 @@ public class JWTServiceImpl implements JWTService {
     public boolean isTokenExpired(String token){
         return extractClaim(token, Claims::getExpiration).before(new Date());
     }
+
 }
