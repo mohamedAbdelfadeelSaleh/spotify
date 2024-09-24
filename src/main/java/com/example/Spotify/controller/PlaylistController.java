@@ -1,14 +1,17 @@
 package com.example.Spotify.controller;
 
 import com.example.Spotify.dto.UpdatePlaylistRequest;
+import com.example.Spotify.dto.UpdatePlaylistStatus;
 import com.example.Spotify.dto.UpdateSongInPlaylistRequest;
 import com.example.Spotify.dto.PlaylistRequest;
 import com.example.Spotify.model.Playlist;
 import com.example.Spotify.model.SongInfo;
+import com.example.Spotify.service.JWTService;
 import com.example.Spotify.service.PlaylistService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,11 +21,16 @@ import java.util.List;
 @RequestMapping("/api/v1/playlist")
 public class PlaylistController {
     private final PlaylistService playlistService;
+    private final JWTService jwtService;
 
     @PostMapping()
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<String> addPlaylist(
-            @RequestBody PlaylistRequest playlistRequest
+            @RequestBody PlaylistRequest playlistRequest,
+            @RequestHeader("Authorization") String token
     ) {
+        Long userId = jwtService.extractUserId(token.substring(7));
+        playlistRequest.setUserId(userId);
         return ResponseEntity.ok(playlistService.addPlaylist(playlistRequest));
     }
 
@@ -64,6 +72,17 @@ public class PlaylistController {
             @RequestBody UpdateSongInPlaylistRequest updateSongInPlaylistRequest
     ){
         return ResponseEntity.ok(playlistService.removeSong(updateSongInPlaylistRequest));
+    }
+
+    @PutMapping("/updateStatus")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<String> updatePlaylistStatus(
+            @RequestBody UpdatePlaylistStatus updatePlaylistStatus,
+            @RequestHeader("Authorization") String token
+    ) {
+            Long userId = jwtService.extractUserId(token.substring(7));
+            updatePlaylistStatus.setUserId(userId);
+            return ResponseEntity.ok(playlistService.updateStatus(updatePlaylistStatus));
     }
 
 }

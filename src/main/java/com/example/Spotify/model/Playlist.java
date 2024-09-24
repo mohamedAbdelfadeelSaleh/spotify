@@ -1,6 +1,7 @@
 package com.example.Spotify.model;
 
 
+import com.example.Spotify.enums.PlaylistStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -25,6 +26,8 @@ public class Playlist {
     private String name;
     private boolean isVisible;
     private int popularity;
+    @Enumerated(EnumType.STRING)
+    private PlaylistStatus status;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -37,5 +40,10 @@ public class Playlist {
     @OneToMany(mappedBy = "playlist", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<SongPlaylistRelation> songPlaylistRelation = new ArrayList<>();
+
+    @OneToMany(mappedBy = "playlist", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<PlaylistContributors> playlistContributorsList = new ArrayList<>();
+
 
 }

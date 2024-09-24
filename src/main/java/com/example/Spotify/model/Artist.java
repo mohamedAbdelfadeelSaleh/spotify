@@ -1,5 +1,6 @@
 package com.example.Spotify.model;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.*;
@@ -23,7 +24,7 @@ public class Artist {
     private String name;
     private int popularity;
     private String imageURL;
-
+    private Double Balance;
     @OneToMany(mappedBy = "artist", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
     private List<SongInfo> songInfos = new ArrayList<>();
@@ -31,4 +32,12 @@ public class Artist {
     @OneToMany(mappedBy = "artist", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Album> albums = new ArrayList<>();
+
+    @OneToMany(mappedBy = "artist", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Subscription> subscriptionList = new ArrayList();
+
+    @OneToMany(mappedBy = "artist")
+    @JsonIgnore
+    private List<UserArtistFollow> userArtistFollowList = new ArrayList();
 }

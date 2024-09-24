@@ -30,6 +30,8 @@ public class User implements UserDetails {
     private String email;
     private String password;
     private int popularity;
+    private int isPremium;
+    private Double balance;
 
     @Enumerated(EnumType.STRING)
     private Role role;
@@ -50,6 +52,17 @@ public class User implements UserDetails {
     @JsonIgnore
     private List<UserSongContinue> userSongContinues = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<PlaylistContributors> playlistContributorsList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<UserArtistFollow> userArtistFollowList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<UserSubscription> userSubscriptionList = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

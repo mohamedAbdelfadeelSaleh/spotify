@@ -27,6 +27,7 @@ public class CommentController {
             @RequestHeader("Authorization") String token
     ) {
         Long userId = jwtService.extractUserId(token.substring(7));
+        System.out.println(userId);
         addCommentDTO.setUserId(userId);
         return ResponseEntity.ok(
                 commentService.addCommentToSong(addCommentDTO)

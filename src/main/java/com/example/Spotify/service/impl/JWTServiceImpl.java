@@ -7,7 +7,6 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-//import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -36,10 +35,11 @@ public class JWTServiceImpl implements JWTService {
     ) {
         Map<String, Object> claims = new HashMap<>();
         if(userDetails instanceof User) {
-            claims.put("userId", ((User)userDetails).getId());
-        }
-        claims.put("roles", userDetails.getAuthorities());  // Add roles to claims
-        return Jwts.builder()
+            User user = (User) userDetails;
+            claims.put("userId", user.getId());
+            claims.put("roles", user.getAuthorities());
+            claims.put("isPremium", user.getIsPremium());
+        }return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))

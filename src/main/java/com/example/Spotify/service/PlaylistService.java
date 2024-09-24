@@ -2,6 +2,7 @@ package com.example.Spotify.service;
 
 //import com.example.Spotify.dto.UpdateAlbumRequest;
 import com.example.Spotify.dto.UpdatePlaylistRequest;
+import com.example.Spotify.dto.UpdatePlaylistStatus;
 import com.example.Spotify.dto.UpdateSongInPlaylistRequest;
 import com.example.Spotify.dto.PlaylistRequest;
 import com.example.Spotify.model.Playlist;
@@ -17,5 +18,5 @@ public interface PlaylistService {
     String changeVisibility(UpdatePlaylistRequest updatePlaylistRequest);
     String addSong(UpdateSongInPlaylistRequest updateSongInPlaylistRequest);
     String removeSong(UpdateSongInPlaylistRequest updateSongInPlaylistRequest);
-
+    String updateStatus(UpdatePlaylistStatus updatePlaylistStatus);
 }

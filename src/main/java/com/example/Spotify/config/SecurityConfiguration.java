@@ -39,7 +39,7 @@ public class SecurityConfiguration {
                     .requestMatchers(HttpMethod.GET, "/api/v1/artists/**").authenticated()
                     .requestMatchers("api/v1/auth/**").permitAll()
                     .requestMatchers("/api/v1/comments/**").authenticated()
-                    .requestMatchers(HttpMethod.POST, "/api/v1/playlists").hasRole("ARTIST")
+                    .requestMatchers(HttpMethod.POST, "/api/v1/playlists").authenticated()
                     .requestMatchers(HttpMethod.GET, "/api/v1/playlists").permitAll()
                     .requestMatchers(HttpMethod.GET, "/api/v1/playlists/access").permitAll()
                     .requestMatchers( HttpMethod.DELETE, "/api/v1/playlists").hasAnyRole("ADMIN", "ARTIST")

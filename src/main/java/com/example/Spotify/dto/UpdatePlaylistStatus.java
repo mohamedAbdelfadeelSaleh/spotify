@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class PlaylistRequest {
+public class UpdatePlaylistStatus {
     private Long userId;
-    private String playlistName;
+    private Long playlistId;
     private PlaylistStatus playlistStatus;
 }
