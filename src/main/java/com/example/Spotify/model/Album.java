@@ -25,6 +25,7 @@ public class Album {
     private Date releaseDate;
     private boolean isPremium;
     private int popularity;
+    private String genre;
 
     @ManyToOne
     @JoinColumn(name = "artist_id")

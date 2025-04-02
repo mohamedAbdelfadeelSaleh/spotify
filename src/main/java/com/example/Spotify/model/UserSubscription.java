@@ -26,7 +26,7 @@ public class UserSubscription {
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "subscribtion_id")
+    @JoinColumn(name = "subscription_id")
     private Subscription subscription;
 }
 

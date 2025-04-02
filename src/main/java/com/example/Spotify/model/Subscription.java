@@ -25,7 +25,7 @@ public class Subscription {
     private Double price;
 
     @ManyToOne
-    @JoinColumn(name = "aritst_id")
+    @JoinColumn(name = "artist_id")
     private Artist artist;
 
     @OneToMany(mappedBy = "subscription")

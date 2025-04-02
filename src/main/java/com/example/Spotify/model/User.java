@@ -29,10 +29,8 @@ public class User implements UserDetails {
     private String lastName;
     private String email;
     private String password;
-    private int popularity;
-    private int isPremium;
     private Double balance;
-
+    private int isPremium;
     @Enumerated(EnumType.STRING)
     private Role role;
 
@@ -93,4 +91,5 @@ public class User implements UserDetails {
     public String getUsername() {
         return getEmail();
     }
+
 }

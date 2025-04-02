@@ -33,6 +33,7 @@ public class SongInfo {
     private Date publishDate;
     private boolean isPremium;
     private int popularity;
+    private String genre;
 
     @OneToMany(mappedBy = "songInfo", cascade = CascadeType.ALL)
     @JsonIgnore

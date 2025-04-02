@@ -24,7 +24,7 @@ public class Artist {
     private String name;
     private int popularity;
     private String imageURL;
-    private Double Balance;
+    private Double balance;
     @OneToMany(mappedBy = "artist", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
     private List<SongInfo> songInfos = new ArrayList<>();
